@@ -1,3 +1,5 @@
+module.exports = {
+
 function checkMessage() {
   client.on("messageCreate", (message) => {
     // Check if the message is in the specific channel
@@ -14,6 +16,4 @@ function checkMessage() {
   });
 }
 
-module.exports = {
-  checkMessage: checkMessage,
 };
