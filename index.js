@@ -8,8 +8,8 @@ const client = new Client({
 });
 
 const config = require("./config.json");
-const { mes } = require("./message.js");
+const mes = require("./message.js");
 
-mes.checkMessage();
+mes.checkMessage;
 
 client.login(config.BOT_TOKEN);
