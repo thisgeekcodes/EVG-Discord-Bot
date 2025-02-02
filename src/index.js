@@ -13,11 +13,12 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.GuildPresences,
     GatewayIntentBits.MessageContent,
   ],
 });
 // Create Event Emitter
-const eventEmitter = new EventEmitter(); // Create an event emitter
+const eventEmitter = new EventEmitter();
 
 // Client Ready
 client.once(Events.ClientReady, (readyClient) => {
@@ -26,6 +27,11 @@ client.once(Events.ClientReady, (readyClient) => {
 // Emit an event when an interaction is created
 client.on("interactionCreate", async (interaction) => {
   eventEmitter.emit("interaction", interaction); // Forward interaction to event handler
+});
+
+// Listen for presence updates and emit them to our eventEmitter
+client.on("presenceUpdate", (oldPresence, newPresence) => {
+  eventEmitter.emit("presenceUpdate", oldPresence, newPresence);
 });
 
 // Register commands when starting the bot
@@ -40,4 +46,8 @@ client.login(process.env.TOKEN);
 // Export both client and eventEmitter
 module.exports = { client, eventEmitter };
 
-require("./commands/handle-commands"); // Ensures event listeners are set up
+// Command Handle Events
+require("./commands/handle-commands");
+
+// Activity Handler
+require("./activity/presence");
