@@ -51,3 +51,6 @@ require("./commands/handle-commands");
 
 // Activity Handler
 require("./activity/presence");
+
+// Load the Twitter monitor module (this will start polling)
+require("./api/xMonitor");
