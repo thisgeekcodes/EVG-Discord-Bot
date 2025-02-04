@@ -21,7 +21,7 @@ async function getUserId(username) {
       Authorization: `Bearer ${process.env.TWITTER_BEARER_TOKEN}`,
     },
   });
-  
+
   if (response.status === 429) {
     const retryAfter = response.headers.get("retry-after");
     console.error(
@@ -31,7 +31,7 @@ async function getUserId(username) {
   }
 
   const data = await response.json();
-  console.log("getUserId response:", data); // Debug log
+
   if (!data.data) throw new Error(`Unable to fetch user data for ${username}`);
   const userId = data.data.id;
   userIdCache.set(username, userId);

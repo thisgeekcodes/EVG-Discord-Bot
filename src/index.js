@@ -3,7 +3,13 @@ const path = require("node:path");
 
 require("dotenv").config({ path: __dirname + "/./../.env" });
 
-const { Client, Collection, GatewayIntentBits, Events } = require("discord.js");
+const {
+  Client,
+  Collection,
+  GatewayIntentBits,
+  Events,
+  Partials,
+} = require("discord.js");
 const EventEmitter = require("events");
 const registerCommands = require("./commands/register-commands");
 
@@ -15,7 +21,10 @@ const client = new Client({
     GatewayIntentBits.GuildMembers,
     GatewayIntentBits.GuildPresences,
     GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.GuildVoiceStates,
   ],
+  partials: [Partials.Message, Partials.Channel, Partials.Reaction],
 });
 // Create Event Emitter
 const eventEmitter = new EventEmitter();
@@ -54,3 +63,9 @@ require("./activity/presence");
 
 // Load the Twitter monitor module (this will start polling)
 require("./api/xMonitor");
+
+// Reaction Handler
+require("./activity/reaction-handler");
+
+// VC Handler
+require("./activity/voicechannel-handler");

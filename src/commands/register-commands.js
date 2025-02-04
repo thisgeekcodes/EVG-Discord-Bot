@@ -4,8 +4,52 @@ const { REST, Routes } = require("discord.js");
 
 const commands = [
   {
-    name: "stream",
-    description: "Let everyone know you are streaming!",
+    name: "addrule",
+    description: "Add a new rule to the rules message.",
+    options: [
+      {
+        name: "name",
+        type: 3, // STRING
+        description: "The field name (a short word) for the rule.",
+        required: true,
+      },
+      {
+        name: "rule",
+        type: 3, // STRING
+        description: "The rule text to add.",
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "editrule",
+    description: "Edit an existing rule in the rules message.",
+    options: [
+      {
+        name: "name",
+        type: 3, // STRING
+        description: "The field name of the rule to edit.",
+        required: true,
+      },
+      {
+        name: "rule",
+        type: 3, // STRING
+        description: "The new rule text.",
+        required: true,
+      },
+    ],
+  },
+  {
+    name: "deleterule",
+    description: "Delete an existing rule from the rules message.",
+    options: [
+      {
+        name: "name",
+        type: 3, // STRING
+        description: "The field name of the rule to delete.",
+        required: true,
+      },
+    ],
   },
 ];
 
