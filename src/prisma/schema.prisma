@@ -1,0 +1,28 @@
+// prisma/schema.prisma
+
+datasource db {
+  provider = "mysql" // or "postgresql" if you're using PostgreSQL
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Team {
+  id         Int           @id @default(autoincrement())
+  team_name  String        @unique
+  team_lead  String        // Discord member ID
+  created_at DateTime      @default(now())
+  members    TeamMember[]  // Relation field: A team has many members
+}
+
+model TeamMember {
+  id        Int      @id @default(autoincrement())
+  team_id   Int
+  team      Team     @relation(fields: [team_id], references: [id], onDelete: Cascade)
+  member_id String   // Discord member ID
+  joined_at DateTime @default(now())
+
+  @@unique([team_id, member_id])
+}
