@@ -1,6 +1,7 @@
 const path = require("node:path");
 require("dotenv").config({ path: __dirname + "/./../../.env" });
 const { REST, Routes } = require("discord.js");
+const { SlashCommandBuilder } = require("@discordjs/builders");
 
 const commands = [
   {
@@ -51,6 +52,42 @@ const commands = [
       },
     ],
   },
+  new SlashCommandBuilder()
+    .setName("create-team")
+    .setDescription("Creates a new team")
+    .addStringOption((option) =>
+      option
+        .setName("name")
+        .setDescription("The name of the team")
+        .setRequired(true)
+    )
+    .addUserOption((option) =>
+      option
+        .setName("lead")
+        .setDescription("The user who will be the team lead")
+        .setRequired(true)
+    )
+    .addStringOption((option) =>
+      option
+        .setName("description")
+        .setDescription("A short description of the team")
+        .setRequired(false)
+    ),
+  new SlashCommandBuilder()
+    .setName("add-to-team")
+    .setDescription("Adds a member to a team")
+    .addStringOption((option) =>
+      option
+        .setName("name")
+        .setDescription("The unique name of the team")
+        .setRequired(true)
+    )
+    .addUserOption((option) =>
+      option
+        .setName("member")
+        .setDescription("The user to add to the team")
+        .setRequired(true)
+    ),
 ];
 
 async function registerCommands() {

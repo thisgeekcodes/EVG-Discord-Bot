@@ -69,3 +69,9 @@ require("./activity/reaction-handler");
 
 // VC Handler
 require("./activity/voicechannel-handler");
+
+// Team Handler
+require("./commands/team-commands");
+
+// Logging
+require("./activity/server-logs");
