@@ -39,7 +39,20 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
         if (joinedChannelId === guestLobbyId) {
           permissionOverwrites.push({
             id: process.env.GUEST_ROLE_ID,
-            allow: ["Connect", "Speak"],
+            allow: [
+              "ViewChannel",
+              "Connect",
+              "Speak",
+              "Stream",
+              "UseVAD",
+              "ViewChannel",
+              "SendMessages",
+              "SendTTSMessages",
+              "EmbedLinks",
+              "AttachFiles",
+              "ReadMessageHistory",
+              "AddReactions",
+            ],
           });
         }
 
