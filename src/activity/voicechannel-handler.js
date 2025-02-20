@@ -37,23 +37,41 @@ client.on("voiceStateUpdate", async (oldState, newState) => {
         // Prepare permission overwrites (for guest lobby)
         let permissionOverwrites = [];
         if (joinedChannelId === guestLobbyId) {
-          permissionOverwrites.push({
-            id: process.env.GUEST_ROLE_ID,
-            allow: [
-              "ViewChannel",
-              "Connect",
-              "Speak",
-              "Stream",
-              "UseVAD",
-              "ViewChannel",
-              "SendMessages",
-              "SendTTSMessages",
-              "EmbedLinks",
-              "AttachFiles",
-              "ReadMessageHistory",
-              "AddReactions",
-            ],
-          });
+          permissionOverwrites.push(
+            {
+              id: process.env.GUEST_ROLE_ID,
+              allow: [
+                "ViewChannel",
+                "Connect",
+                "Speak",
+                "Stream",
+                "UseVAD",
+                "ViewChannel",
+                "SendMessages",
+                "SendTTSMessages",
+                "EmbedLinks",
+                "AttachFiles",
+                "ReadMessageHistory",
+                "AddReactions",
+              ],
+            },
+            {
+              id: process.env.EVG_ROLE_ID,
+              allow: [
+                "ViewChannel",
+                "Connect",
+                "Speak",
+                "Stream",
+                "UseVAD",
+                "SendMessages",
+                "SendTTSMessages",
+                "EmbedLinks",
+                "AttachFiles",
+                "ReadMessageHistory",
+                "AddReactions",
+              ],
+            }
+          );
         }
 
         // Create the temporary voice channel
